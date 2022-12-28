@@ -13,7 +13,13 @@ func countPomidors(hours int) int {
 	return (hours * 60) / 30
 }
 
+//sleep for a 25 mins
 func pomidorWork() {
+	time.Sleep(25 * time.Minute)
+}
+
+//create Work window
+func showWorkWindow() {
 	a := app.New()
 
 	w := a.NewWindow("Time to work")
@@ -25,12 +31,10 @@ func pomidorWork() {
 	w.ShowAndRun()
 	time.Sleep(2 * time.Second)
 	w.Hide()
-	time.Sleep(25 * time.Minute)
-
 }
 
-func pomidorRest() {
-
+//create Rest Window
+func showRestWindow() {
 	a := app.New()
 
 	w := a.NewWindow("Rest")
@@ -38,11 +42,17 @@ func pomidorRest() {
 	msg := widget.NewLabel("You have 5 minustes rest")
 
 	w.SetContent(msg)
+
 	w.Resize(fyne.NewSize(100, 100))
 
 	w.ShowAndRun()
+
 	w.Close()
-	time.Sleep(3 * time.Second)
+
+}
+
+//sleep 5 mins - rest
+func pomidorRest() {
 
 	time.Sleep(5 * time.Minute)
 
@@ -50,20 +60,20 @@ func pomidorRest() {
 
 func main() {
 
-	var (
-		hours int
-	)
+	var hours int = 8
 
 	fmt.Print("Input the number of hours you want to study: ... ")
-
-	hours = 8
 
 	numberOfPomidors := countPomidors(hours)
 
 	fmt.Print(numberOfPomidors)
 
 	for i := 0; i < numberOfPomidors; i++ {
+		showWorkWindow()
+
 		pomidorWork()
+
+		showRestWindow()
 
 		pomidorRest()
 

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/widget"
 )
@@ -20,10 +21,10 @@ func pomidorWork() {
 	msg := widget.NewLabel("25 minustes work")
 
 	w.SetContent(msg)
-
-	time.Sleep(3 * time.Second)
-
-	w.Close()
+	w.Resize(fyne.NewSize(300, 300))
+	w.ShowAndRun()
+	time.Sleep(2 * time.Second)
+	w.Hide()
 	time.Sleep(25 * time.Minute)
 
 }
@@ -37,10 +38,11 @@ func pomidorRest() {
 	msg := widget.NewLabel("You have 5 minustes rest")
 
 	w.SetContent(msg)
+	w.Resize(fyne.NewSize(100, 100))
 
-	time.Sleep(3 * time.Second)
-
+	w.ShowAndRun()
 	w.Close()
+	time.Sleep(3 * time.Second)
 
 	time.Sleep(5 * time.Minute)
 
@@ -61,6 +63,9 @@ func main() {
 	fmt.Print(numberOfPomidors)
 
 	for i := 0; i < numberOfPomidors; i++ {
+		pomidorWork()
+
+		pomidorRest()
 
 	}
 }
